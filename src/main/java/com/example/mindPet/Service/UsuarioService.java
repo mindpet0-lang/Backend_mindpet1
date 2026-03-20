@@ -23,12 +23,8 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario actualizarUsuario(int id, Usuario usuario){
+    public Usuario actualizarUsuario(Long id, Usuario usuario){
         usuario.setId(id);
         return usuarioRepository.save(usuario);
-    }
-
-    public void eliminarUsuario(int id) {
-        usuarioRepository.deleteById(id);
     }
 }

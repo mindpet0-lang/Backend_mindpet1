@@ -8,26 +8,24 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nombre;
+
+    @Column(unique = true)
     private String correo;
-    private String contrasena;
-    private String fechaNacimiento;
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+    private String password;
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    // 🔹 Constructor vacío (IMPORTANTE)
+    public Usuario() {}
 
-    public int getId() {
+    // 🔹 Getters y Setters
+
+    public Long getId() {
         return id;
     }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,11 +45,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
