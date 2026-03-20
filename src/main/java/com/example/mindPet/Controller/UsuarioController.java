@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.mindPet.Model.loginResponse;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public Usuario actualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario){
-        return usuarioService.actualizarUsuario(id, usuario);
+        return usuarioService.actualizarUsuario((long) id, usuario);
     }
 
     @DeleteMapping("/{id}")
@@ -51,14 +52,13 @@ public class UsuarioController {
 
         if (encontrado != null && encontrado.getPassword().equals(user.getPassword())) {
 
-            // 🔥 RESPUESTA CORRECTA
-            return ResponseEntity.ok(new LoginResponse(
-                    "fake-jwt-token",
-                    encontrado
-            ));
+            String token = "fake-jwt-token"; // por ahora simple
+
+            loginResponse response = new loginResponse(token, encontrado);
+
+            return ResponseEntity.ok(response);
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body("Credenciales incorrectas");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
     }
 }
