@@ -1,9 +1,10 @@
 package com.example.mindPet.Controller;
 
 import com.example.mindPet.Model.Foro;
-import com.example.mindPet.Service.ForoService;
+import com.example.mindPet.Repository.ForoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -11,29 +12,39 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ForoController {
 
-    private final ForoService service;
+    private final ForoRepository repo;
 
-    public ForoController(ForoService service) {
-        this.service = service;
+    public ForoController(ForoRepository repo) {
+        this.repo = repo;
     }
 
     @GetMapping
     public List<Foro> listar() {
-        return service.listar();
+        return repo.findAll();
     }
 
     @PostMapping
-    public Foro guardar(@RequestBody Foro foro) {
-        return service.guardar(foro);
+    public Foro crear(@RequestBody Foro foro) {
+        // Inicializar likes vacíos si no vienen
+        if (foro.getLikes() == null) {
+            foro.setLikes(new ArrayList<>());
+        }
+        return repo.save(foro);
     }
 
     @PutMapping("/{id}")
     public Foro actualizar(@PathVariable int id, @RequestBody Foro foro) {
-        return service.actualizar(id, foro);
+        Foro existente = repo.findById(id).orElseThrow(() -> new RuntimeException("Foro no encontrado"));
+        // Actualizar todos los campos necesarios
+        existente.setContent(foro.getContent());
+        existente.setAuthor(foro.getAuthor());
+        existente.setImage(foro.getImage());
+        existente.setLikes(foro.getLikes());
+        return repo.save(existente);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable int id) {
-        service.eliminar(id);
+        repo.deleteById(id);
     }
 }

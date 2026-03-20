@@ -12,7 +12,16 @@ public class Usuario {
 
     private String nombre;
     private String correo;
-    private String password;
+    private String contrasena;
+    private String fechaNacimiento;
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
     public int getId() {
         return id;
@@ -38,11 +47,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

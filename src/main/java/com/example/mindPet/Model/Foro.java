@@ -2,6 +2,8 @@ package com.example.mindPet.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "foros")
 public class Foro {
@@ -9,19 +11,48 @@ public class Foro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String author;
+    private String content;
+    private String image;
 
-    private String titulo;
-    private String descripcion;
+    @ElementCollection
+    private List<String> likes;
+
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
 
-    public String getTitulo() { return titulo; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-    public String getDescripcion() { return descripcion; }
+    public String getContent() {
+        return content;
+    }
 
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<String> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
+    }
+
 }
