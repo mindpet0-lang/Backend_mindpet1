@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "foros")
 public class Foro {
-
+//Ya quedo/ /
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
